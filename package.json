@@ -1,0 +1,24 @@
+{
+  "name": "UCI_ML_Repository",
+  "private": true,
+  "license": "UNLICENSED",
+  "workspaces": [
+    "web"
+  ],
+  "scripts": {
+    "setup": "husky install",
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build"
+  },
+  "lint-staged": {
+    "*.{js,ts,svelte}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "turbo": "^1.4.4"
+  }
+}
