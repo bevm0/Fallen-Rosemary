@@ -1,9 +1,13 @@
 {
   "extends": "./.svelte-kit/tsconfig.json",
   "compilerOptions": {
+    "strict": true,
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
     "baseUrl": "..",
     "paths": {
-      "server": ["server/src"],
+      "server": ["server"],
       "$components/*": ["web/src/components/*"],
       "$lib": ["web/src/lib", "src/lib"],
       "$lib/*": ["web/src/lib/*", "src/lib/*"]

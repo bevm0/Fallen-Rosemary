@@ -3,10 +3,12 @@ import type { Router } from 'server/src/routers'
 import * as trpc from '@trpc/client'
 import type { inferProcedureInput, inferProcedureOutput } from '@trpc/server'
 
-export const yeet = trpc.createTRPCClient<Router>({
+// standalone client
+export const trpcClient = trpc.createTRPCClient<Router>({
   url: '/trpc',
 })
 
+// client for svelte-kit
 export default (loadFetch?: LoadEvent['fetch']) =>
   trpc.createTRPCClient<Router>({
     url: '/trpc',

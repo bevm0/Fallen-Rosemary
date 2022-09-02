@@ -1,7 +1,11 @@
+# dev stuff
 node_modules/
 .svelte-kit/
 build/
 
+# private
 .env
+
+# desktop stuff
 .DS_Store
 desktop.ini

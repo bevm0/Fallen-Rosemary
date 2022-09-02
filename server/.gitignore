@@ -1,6 +1,19 @@
+# dev stuff
 node_modules/
 dist/
 
+# private
 .env
+
+# file explorer stuff
 .DS_Store
 desktop.ini
+
+# static files from datasets
+*.rar
+*.zip
+*.csv
+*.xlsx
+*.PDF
+
+!.gitkeep

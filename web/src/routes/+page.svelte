@@ -1,3 +1,18 @@
+<script lang="ts">
+  import { useQuery } from '@sveltestack/svelte-query'
+  import { AbbrevNum } from '$lib/utils'
+  import trpc from '$lib/trpc'
+
+  const queryResult = useQuery(
+    'getDatasets',
+    async () =>
+      await trpc(fetch).query('getDatasets', {
+        orderBy: 'DateDonated',
+        limit: 6,
+      })
+  )
+</script>
+
 <div class="hero mx-auto my-12 bg-base-200">
   <div class="hero-content text-center">
     <div class="max-w-md">
@@ -17,165 +32,184 @@
   </div>
 </div>
 
-<div class="overflow-x-auto w-full">
-  <table class="table w-full">
-    <!-- head -->
-    <thead>
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" class="checkbox" />
-          </label>
-        </th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th />
-      </tr>
-    </thead>
-    <tbody>
-      <!-- row 1 -->
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" class="checkbox" />
-          </label>
-        </th>
-        <td>
-          <div class="flex items-center space-x-3">
-            <div class="avatar">
-              <div class="mask mask-squircle w-12 h-12">
-                <img
-                  src="/tailwind-css-component-profile-2@56w.png"
-                  alt="Avatar Tailwind CSS Component"
-                />
-              </div>
-            </div>
-            <div>
-              <div class="font-bold">Hart Hagerty</div>
-              <div class="text-sm opacity-50">United States</div>
+<div class="grid grid-cols-2 gap-2 mx-4">
+  <div class="flex flex-col col-span-1 gap-6 my-16 mx-6 max-w-[40vw]">
+    {#each $queryResult.data || [] as dataset}
+      <div>
+        <h1 class="divider text-primary font-bold">
+          <a href="/" class="btn btn-ghost text-lg p-1">
+            {dataset.Name}
+          </a>
+        </h1>
+        <div class="grid grid-cols-12 gap-5">
+          <div class="avatar col-span-1 flex self-center justify-self-center">
+            <div class="mask mask-squircle w-12 h-12 flex align-center">
+              <img
+                src={dataset?.Graphics != null
+                  ? '/ml/datasets/' + dataset.ID + '/Graphics/SmallLarge.jpg'
+                  : '/ml/datasets/default/SmallLarge.jpg'}
+                alt="Avatar Tailwind CSS Component"
+              />
             </div>
           </div>
-        </td>
-        <td>
-          Zemlak, Daniel and Leannon
-          <br />
-          <span class="badge badge-ghost badge-sm">Desktop Support Technician</span>
-        </td>
-        <td>Purple</td>
-        <th>
-          <button class="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-      <!-- row 2 -->
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" class="checkbox" />
-          </label>
-        </th>
-        <td>
-          <div class="flex items-center space-x-3">
-            <div class="avatar">
-              <div class="mask mask-squircle w-12 h-12">
-                <img
-                  src="/tailwind-css-component-profile-3@56w.png"
-                  alt="Avatar Tailwind CSS Component"
-                />
+
+          <div class="col-span-11 gap-5">
+            <h2 class="my-4 line-clamp-2">{dataset.Abstract}</h2>
+            <div class="grid grid-cols-12">
+              <div class="col-span-4 flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6 stroke-primary"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
+                  />
+                </svg>
+
+                {dataset.Task}
+              </div>
+              <div class="col-span-4 flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6 stroke-primary"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z"
+                  />
+                </svg>
+
+                {dataset?.NumInstances
+                  ? AbbrevNum(dataset.NumInstances) + '  Instances'
+                  : 'N/A'}
+              </div>
+              <div class="col-span-4 flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6 rotate-90 stroke-primary"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z"
+                  />
+                </svg>
+
+                {dataset?.NumAttributes
+                  ? AbbrevNum(dataset.NumAttributes) + '  Attributes'
+                  : 'N/A'}
               </div>
             </div>
-            <div>
-              <div class="font-bold">Brice Swyre</div>
-              <div class="text-sm opacity-50">China</div>
+            <div class="flex" />
+          </div>
+        </div>
+      </div>
+    {/each}
+  </div>
+
+  <!-- 2 -->
+
+  <div class="flex flex-col col-span-1 gap-6 my-16 mx-6 max-w-[40vw]">
+    {#each $queryResult.data || [] as dataset}
+      <div>
+        <h1 class="divider text-primary font-bold">
+          <a href="/" class="btn btn-ghost text-lg p-1">
+            {dataset.Name}
+          </a>
+        </h1>
+        <div class="grid grid-cols-12 gap-5">
+          <div class="avatar col-span-1 flex self-center justify-self-center">
+            <div class="mask mask-squircle w-12 h-12 flex align-center">
+              <img
+                src={dataset?.Graphics != null
+                  ? '/ml/datasets/' + dataset.ID + '/Graphics/SmallLarge.jpg'
+                  : '/ml/datasets/default/SmallLarge.jpg'}
+                alt="Avatar Tailwind CSS Component"
+              />
             </div>
           </div>
-        </td>
-        <td>
-          Carroll Group
-          <br />
-          <span class="badge badge-ghost badge-sm">Tax Accountant</span>
-        </td>
-        <td>Red</td>
-        <th>
-          <button class="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-      <!-- row 3 -->
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" class="checkbox" />
-          </label>
-        </th>
-        <td>
-          <div class="flex items-center space-x-3">
-            <div class="avatar">
-              <div class="mask mask-squircle w-12 h-12">
-                <img
-                  src="/tailwind-css-component-profile-4@56w.png"
-                  alt="Avatar Tailwind CSS Component"
-                />
+
+          <div class="col-span-11 gap-5">
+            <h2 class="my-4 line-clamp-2">{dataset.Abstract}</h2>
+            <div class="grid grid-cols-12">
+              <div class="col-span-4 flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6 stroke-primary"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
+                  />
+                </svg>
+
+                {dataset.Task}
+              </div>
+              <div class="col-span-4 flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6 stroke-primary"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z"
+                  />
+                </svg>
+
+                {dataset?.NumInstances
+                  ? AbbrevNum(dataset.NumInstances) + '  Instances'
+                  : 'N/A'}
+              </div>
+              <div class="col-span-4 flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6 rotate-90 stroke-primary"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z"
+                  />
+                </svg>
+
+                {dataset?.NumAttributes
+                  ? AbbrevNum(dataset.NumAttributes) + '  Attributes'
+                  : 'N/A'}
               </div>
             </div>
-            <div>
-              <div class="font-bold">Marjy Ferencz</div>
-              <div class="text-sm opacity-50">Russia</div>
-            </div>
+            <div class="flex" />
           </div>
-        </td>
-        <td>
-          Rowe-Schoen
-          <br />
-          <span class="badge badge-ghost badge-sm">Office Assistant I</span>
-        </td>
-        <td>Crimson</td>
-        <th>
-          <button class="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-      <!-- row 4 -->
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" class="checkbox" />
-          </label>
-        </th>
-        <td>
-          <div class="flex items-center space-x-3">
-            <div class="avatar">
-              <div class="mask mask-squircle w-12 h-12">
-                <img
-                  src="/tailwind-css-component-profile-5@56w.png"
-                  alt="Avatar Tailwind CSS Component"
-                />
-              </div>
-            </div>
-            <div>
-              <div class="font-bold">Yancy Tear</div>
-              <div class="text-sm opacity-50">Brazil</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          Wyman-Ledner
-          <br />
-          <span class="badge badge-ghost badge-sm">Community Outreach Specialist</span>
-        </td>
-        <td>Indigo</td>
-        <th>
-          <button class="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-    </tbody>
-    <!-- foot -->
-    <tfoot>
-      <tr>
-        <th />
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th />
-      </tr>
-    </tfoot>
-  </table>
+        </div>
+      </div>
+    {/each}
+  </div>
 </div>

@@ -1,9 +1,10 @@
 <script lang="ts">
   import { clickOutside } from '$lib/actions'
+
   import { useQuery } from '@sveltestack/svelte-query'
   import trpc from '$lib/trpc'
-  import VirtualList from '$components/VirtualList.svelte'
 
+  import VirtualList from '$components/VirtualList.svelte'
   import SearchIcon from '$components/Icons/Search.svelte'
 
   // input

@@ -21,7 +21,11 @@ module.exports = {
       },
     ],
   },
-  plugins: [require('daisyui'), require('tailwind-scrollbar')],
+  plugins: [
+    require('daisyui'),
+    require('tailwind-scrollbar'),
+    require('@tailwindcss/line-clamp'),
+  ],
   variants: {
     scrollbar: ['rounded'],
   },

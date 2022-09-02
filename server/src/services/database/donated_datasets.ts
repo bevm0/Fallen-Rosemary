@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
 import BaseDatabaseService from './base_database_service'
 
 class DonatedDatasetsService extends BaseDatabaseService {
@@ -14,6 +14,24 @@ class DonatedDatasetsService extends BaseDatabaseService {
       },
     })
     return dataset_names.map((d) => d.Name)
+  }
+
+  async selectDatasets(
+    query: Prisma.donated_datasetsFindManyArgs['where'],
+    limit: Prisma.donated_datasetsFindManyArgs['take'],
+    filter: Prisma.donated_datasetsFindManyArgs['orderBy'] | Record<string, never>
+  ) {
+    return await this.prisma.donated_datasets.findMany({
+      where: {
+        Status: 'APPROVED',
+        ...query,
+      },
+      orderBy: {
+        NumHits: 'desc',
+      },
+      take: limit,
+      ...filter,
+    })
   }
 }
 
