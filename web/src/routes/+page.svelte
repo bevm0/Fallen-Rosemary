@@ -1,5 +1,1 @@
-<script>
-  import Header from '$components/Header/index.svelte'
-</script>
-
-<Header />
+<h1>Hello, World</h1>

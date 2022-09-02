@@ -1,6 +1,9 @@
 node_modules/
 .svelte-kit/
 build/
+dist/
+public/
+static/
 
 package-lock.json
 desktop.ini
