@@ -19,7 +19,9 @@ class DonatedDatasetsService extends BaseDatabaseService {
   async selectDatasets(
     query: Prisma.donated_datasetsFindManyArgs['where'],
     limit: Prisma.donated_datasetsFindManyArgs['take'],
-    filter: Prisma.donated_datasetsFindManyArgs['orderBy'] | Record<string, never>
+    filter:
+      | Prisma.donated_datasetsFindManyArgs['orderBy']
+      | Record<string, Record<string, unknown>>
   ) {
     return await this.prisma.donated_datasets.findMany({
       where: {

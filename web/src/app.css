@@ -3,15 +3,16 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 1ex;
+  @apply bg-primary rounded-full;
 }
 
-/* classes for webkit scrollbars if anybody wants to have some fun
-
 ::-webkit-scrollbar {
+  @apply h-4 w-2 bg-secondary-content;
+}
+
+::-webkit-scrollbar-thumb {
 }
 
 ::-webkit-scrollbar-corner {
+  background: #000;
 }
-
-*/

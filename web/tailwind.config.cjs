@@ -6,8 +6,12 @@ module.exports = {
   },
   daisyui: {
     themes: [
+      'cupcake',
+      'synthwave',
+      'luxury',
+      'valentine',
       {
-        mytheme: {
+        uci: {
           primary: '#0064A4',
           secondary: '#FFD200',
           accent: '#C149AD',
@@ -21,11 +25,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    require('daisyui'),
-    require('tailwind-scrollbar'),
-    require('@tailwindcss/line-clamp'),
-  ],
+  plugins: [require('daisyui'), require('@tailwindcss/line-clamp')],
   variants: {
     scrollbar: ['rounded'],
   },

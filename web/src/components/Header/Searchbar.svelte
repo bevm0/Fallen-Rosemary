@@ -61,7 +61,7 @@
     </div>
     <div
       tabindex="0"
-      class="absolute w-full top-full collapse border border-base-300 border-t-primary border-b-0 outline-none bg-base-100 max-h-80 overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-100 scrollbar-thumb-rounded-full"
+      class="absolute w-full top-full collapse border border-base-300 border-t-primary border-b-0 outline-none bg-base-100 max-h-80 overflow-y-scroll"
       class:collapse-open={isSearching}
     >
       <div class="collapse-content">

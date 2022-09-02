@@ -13,7 +13,7 @@
   )
 </script>
 
-<div class="hero mx-auto my-12 bg-base-200">
+<div class="hero mx-auto my-12">
   <div class="hero-content text-center">
     <div class="max-w-md">
       <h1 class="text-3xl text-primary font-bold">
