@@ -1,0 +1,36 @@
+[32mweb:format[0m: cache hit, replaying output [2m74eb9e1eebbabe3c[0m
+[32mweb:format: [0m
+[32mweb:format: [0m> web@0.1.0 format
+[32mweb:format: [0m> prettier --write .
+[32mweb:format: [0m
+[32mweb:format: [0m.eslintrc.yml 40ms
+[32mweb:format: [0m.prettierrc.yml 3ms
+[32mweb:format: [0mpackage.json 28ms
+[32mweb:format: [0mpostcss.config.cjs 17ms
+[32mweb:format: [0msrc/app.css 19ms
+[32mweb:format: [0msrc/app.html 27ms
+[32mweb:format: [0msrc/components/Header/HeaderBody.svelte 386ms
+[32mweb:format: [0msrc/components/Header/index.svelte 8ms
+[32mweb:format: [0msrc/components/Header/NavLinks.svelte 7ms
+[32mweb:format: [0msrc/components/Header/Profile.svelte 6ms
+[32mweb:format: [0msrc/components/Header/Searchbar.svelte 45ms
+[32mweb:format: [0msrc/components/Header/Sidebar.svelte 8ms
+[32mweb:format: [0msrc/components/Icons/Caret.svelte 10ms
+[32mweb:format: [0msrc/components/Icons/Hamburger.svelte 7ms
+[32mweb:format: [0msrc/components/Icons/Profile.svelte 8ms
+[32mweb:format: [0msrc/components/Icons/Search.svelte 8ms
+[32mweb:format: [0msrc/components/Icons/X.svelte 5ms
+[32mweb:format: [0msrc/global.d.ts 4ms
+[32mweb:format: [0msrc/hooks.ts 6ms
+[32mweb:format: [0msrc/lib/actions/clickOutside.ts 11ms
+[32mweb:format: [0msrc/lib/actions/index.ts 2ms
+[32mweb:format: [0msrc/lib/query.ts 8ms
+[32mweb:format: [0msrc/lib/trpc.ts 20ms
+[32mweb:format: [0msrc/routes/+layout.svelte 9ms
+[32mweb:format: [0msrc/routes/+layout.ts 6ms
+[32mweb:format: [0msrc/routes/+page.svelte 2ms
+[32mweb:format: [0msrc/routes/+page.ts 5ms
+[32mweb:format: [0msvelte.config.js 6ms
+[32mweb:format: [0mtailwind.config.cjs 5ms
+[32mweb:format: [0mtsconfig.json 4ms
+[32mweb:format: [0mvite.config.ts 3ms

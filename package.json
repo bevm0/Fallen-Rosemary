@@ -7,9 +7,10 @@
     "server"
   ],
   "scripts": {
-    "setup": "husky install && prisma init",
+    "setup": "husky install && prisma init && prisma generate",
     "dev": "turbo run dev --parallel",
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "format": "turbo run format"
   },
   "lint-staged": {
     "*.{js,ts,svelte}": [

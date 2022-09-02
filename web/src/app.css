@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 1ex;
+}
+
+/* classes for webkit scrollbars if anybody wants to have some fun
+
+::-webkit-scrollbar {
+}
+
+::-webkit-scrollbar-corner {
+}
+
+*/

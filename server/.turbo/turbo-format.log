@@ -1,0 +1,16 @@
+[35mserver:format[0m: cache hit, replaying output [2m58d7ace17200c6bb[0m
+[35mserver:format: [0m
+[35mserver:format: [0m> server@0.1.0 format
+[35mserver:format: [0m> prettier --write .
+[35mserver:format: [0m
+[35mserver:format: [0m.eslintrc.yml 23ms
+[35mserver:format: [0m.prettierrc.yml 5ms
+[35mserver:format: [0mpackage.json 29ms
+[35mserver:format: [0msrc/context.ts 261ms
+[35mserver:format: [0msrc/index.ts 21ms
+[35mserver:format: [0msrc/routers/index.ts 8ms
+[35mserver:format: [0msrc/services/database/base_database_service.ts 4ms
+[35mserver:format: [0msrc/services/database/donated_datasets.ts 8ms
+[35mserver:format: [0msrc/services/database/index.ts 5ms
+[35mserver:format: [0msrc/services/database/keywords.ts 6ms
+[35mserver:format: [0mtsconfig.json 3ms
