@@ -23,7 +23,13 @@
   {:else}
     <div class="navbar-start">
       <button class="btn btn-ghost">
-        <img src="/assets/header/tiny.webp" alt="logo" height="48px" width="200px" />
+        <img
+          src="/assets/header/tiny.webp"
+          alt="logo"
+          height="48px"
+          width="200px"
+          class="w-40 sm:w-auto"
+        />
       </button>
     </div>
   {/if}

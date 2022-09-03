@@ -1,0 +1,31 @@
+[35mserver:build[0m: cache hit, replaying output [2m996f15a49c148cd5[0m
+[35mserver:build: [0m
+[35mserver:build: [0m> server@0.1.0 build
+[35mserver:build: [0m> ts-node ./scripts/esbuild.ts && pkg .
+[35mserver:build: [0m
+[35mserver:build: [0mnode:internal/modules/cjs/loader:936
+[35mserver:build: [0m  throw err;
+[35mserver:build: [0m  ^
+[35mserver:build: [0m
+[35mserver:build: [0mError: Cannot find module './esbuild.ts'
+[35mserver:build: [0mRequire stack:
+[35mserver:build: [0m- /home/senti/Projects/svelte/sentience/server/scripts/imaginaryUncacheableRequireResolveScript
+[35mserver:build: [0m    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:933:15)
+[35mserver:build: [0m    at Function.resolve (node:internal/modules/cjs/helpers:108:19)
+[35mserver:build: [0m    at requireResolveNonCached (/home/senti/Projects/svelte/sentience/node_modules/ts-node/dist/bin.js:549:16)
+[35mserver:build: [0m    at getProjectSearchDir (/home/senti/Projects/svelte/sentience/node_modules/ts-node/dist/bin.js:519:40)
+[35mserver:build: [0m    at phase3 (/home/senti/Projects/svelte/sentience/node_modules/ts-node/dist/bin.js:267:27)
+[35mserver:build: [0m    at bootstrap (/home/senti/Projects/svelte/sentience/node_modules/ts-node/dist/bin.js:47:30)
+[35mserver:build: [0m    at main (/home/senti/Projects/svelte/sentience/node_modules/ts-node/dist/bin.js:33:12)
+[35mserver:build: [0m    at Object.<anonymous> (/home/senti/Projects/svelte/sentience/node_modules/ts-node/dist/bin.js:579:5)
+[35mserver:build: [0m    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+[35mserver:build: [0m    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10) {
+[35mserver:build: [0m  code: 'MODULE_NOT_FOUND',
+[35mserver:build: [0m  requireStack: [
+[35mserver:build: [0m    '/home/senti/Projects/svelte/sentience/server/scripts/imaginaryUncacheableRequireResolveScript'
+[35mserver:build: [0m  ]
+[35mserver:build: [0m}
+[35mserver:build: [0mnpm ERR! Lifecycle script `build` failed with error: 
+[35mserver:build: [0mnpm ERR! Error: command failed 
+[35mserver:build: [0mnpm ERR!   in workspace: server@0.1.0 
+[35mserver:build: [0mnpm ERR!   at location: /home/senti/Projects/svelte/sentience/server 

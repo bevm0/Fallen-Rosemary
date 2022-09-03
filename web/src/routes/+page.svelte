@@ -21,7 +21,7 @@
   )
 </script>
 
-<main class="px-4">
+<main class="px-4 max-w-[1640px] mx-auto">
   <div class="hero mx-auto my-12 mx-0">
     <div class="hero-content text-center">
       <div class="max-w-md">
@@ -45,16 +45,27 @@
     <div
       class="flex flex-col col-span-1 gap-4 p-4 border border-primary border-0 xl:border-r-2"
     >
-      {#each $queryResult.data || [] as dataset}
+      {#each $queryResultHits.data || [] as dataset}
         <div>
-          <h1 class="text-primary text-center font-bold break-all">
-            <a href="/" class="btn btn-ghost text-lg p-1">
+          <h1 class="text-primary text-center font-bold break-word">
+            <a href="/" class="btn btn-ghost p-1">
               {dataset.Name}
             </a>
           </h1>
 
+          <div class="avatar col-span-1 self-center justify-center w-full my-2 sm:hidden">
+            <div class="mask mask-squircle w-12 h-12 flex align-center">
+              <img
+                src={dataset?.Graphics != null
+                  ? '/ml/datasets/' + dataset.ID + '/Graphics/SmallLarge.jpg'
+                  : '/ml/datasets/default/SmallLarge.jpg'}
+                alt=""
+              />
+            </div>
+          </div>
+
           <div class="grid grid-cols-12">
-            <div class="avatar col-span-1 flex self-center justify-self-center">
+            <div class="avatar col-span-1 self-center justify-self-center hidden sm:flex">
               <div class="mask mask-squircle w-12 h-12 flex align-center">
                 <img
                   src={dataset?.Graphics != null
@@ -136,19 +147,28 @@
       {/each}
     </div>
 
-    <div
-      class="flex flex-col col-span-1 gap-4 p-4 border border-primary border-0 xl:border-r-2"
-    >
-      {#each $queryResultHits.data || [] as dataset}
+    <div class="flex flex-col col-span-1 gap-4 p-4">
+      {#each $queryResult.data || [] as dataset}
         <div>
-          <h1 class="text-primary text-center font-bold break-all">
-            <a href="/" class="btn btn-ghost text-lg p-1">
+          <h1 class="text-primary text-center font-bold break-word">
+            <a href="/" class="btn btn-ghost p-1">
               {dataset.Name}
             </a>
           </h1>
 
+          <div class="avatar col-span-1 self-center justify-center w-full my-2 sm:hidden">
+            <div class="mask mask-squircle w-12 h-12 flex align-center">
+              <img
+                src={dataset?.Graphics != null
+                  ? '/ml/datasets/' + dataset.ID + '/Graphics/SmallLarge.jpg'
+                  : '/ml/datasets/default/SmallLarge.jpg'}
+                alt=""
+              />
+            </div>
+          </div>
+
           <div class="grid grid-cols-12">
-            <div class="avatar col-span-1 flex self-center justify-self-center">
+            <div class="avatar col-span-1 self-center justify-self-center hidden sm:flex">
               <div class="mask mask-squircle w-12 h-12 flex align-center">
                 <img
                   src={dataset?.Graphics != null
