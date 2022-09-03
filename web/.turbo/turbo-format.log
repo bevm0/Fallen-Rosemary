@@ -1,39 +1,40 @@
-[32mweb:format[0m: cache hit, replaying output [2m1edabb57244a8c9c[0m
+[32mweb:format[0m: cache hit, replaying output [2mc799a8e033193085[0m
 [32mweb:format: [0m
 [32mweb:format: [0m> web@0.1.0 format
 [32mweb:format: [0m> prettier --write .
 [32mweb:format: [0m
-[32mweb:format: [0m.eslintrc.yml 28ms
-[32mweb:format: [0m.prettierrc.yml 2ms
-[32mweb:format: [0mpackage.json 27ms
-[32mweb:format: [0mpostcss.config.cjs 13ms
-[32mweb:format: [0msrc/app.css 26ms
-[32mweb:format: [0msrc/app.html 26ms
-[32mweb:format: [0msrc/components/Header/HeaderBody.svelte 351ms
-[32mweb:format: [0msrc/components/Header/index.svelte 5ms
+[32mweb:format: [0m.eslintrc.yml 27ms
+[32mweb:format: [0m.prettierrc.yml 3ms
+[32mweb:format: [0mpackage.json 24ms
+[32mweb:format: [0mpostcss.config.cjs 11ms
+[32mweb:format: [0msrc/app.css 25ms
+[32mweb:format: [0msrc/app.html 24ms
+[32mweb:format: [0msrc/components/Header/HeaderBody.svelte 287ms
+[32mweb:format: [0msrc/components/Header/index.svelte 6ms
 [32mweb:format: [0msrc/components/Header/NavLinks.svelte 7ms
-[32mweb:format: [0msrc/components/Header/Profile.svelte 6ms
-[32mweb:format: [0msrc/components/Header/Searchbar.svelte 56ms
-[32mweb:format: [0msrc/components/Header/Sidebar.svelte 6ms
-[32mweb:format: [0msrc/components/Icons/Caret.svelte 6ms
-[32mweb:format: [0msrc/components/Icons/Hamburger.svelte 6ms
-[32mweb:format: [0msrc/components/Icons/Profile.svelte 8ms
+[32mweb:format: [0msrc/components/Header/Profile.svelte 7ms
+[32mweb:format: [0msrc/components/Header/Searchbar.svelte 42ms
+[32mweb:format: [0msrc/components/Header/Sidebar.svelte 8ms
+[32mweb:format: [0msrc/components/Icons/Caret.svelte 7ms
+[32mweb:format: [0msrc/components/Icons/Hamburger.svelte 4ms
+[32mweb:format: [0msrc/components/Icons/Profile.svelte 10ms
 [32mweb:format: [0msrc/components/Icons/Search.svelte 6ms
-[32mweb:format: [0msrc/components/Icons/X.svelte 4ms
-[32mweb:format: [0msrc/components/VirtualList.svelte 51ms
-[32mweb:format: [0msrc/global.d.ts 6ms
-[32mweb:format: [0msrc/hooks.ts 6ms
-[32mweb:format: [0msrc/lib/actions/clickOutside.ts 6ms
+[32mweb:format: [0msrc/components/Icons/X.svelte 5ms
+[32mweb:format: [0msrc/components/VirtualList.svelte 50ms
+[32mweb:format: [0msrc/global.d.ts 5ms
+[32mweb:format: [0msrc/hooks.ts 5ms
+[32mweb:format: [0msrc/lib/actions/clickOutside.ts 5ms
 [32mweb:format: [0msrc/lib/actions/index.ts 2ms
-[32mweb:format: [0msrc/lib/query.ts 6ms
-[32mweb:format: [0msrc/lib/trpc.ts 14ms
+[32mweb:format: [0msrc/lib/query.ts 3ms
+[32mweb:format: [0msrc/lib/trpc.ts 12ms
 [32mweb:format: [0msrc/lib/utils.ts 3ms
 [32mweb:format: [0msrc/routes/+layout.svelte 4ms
-[32mweb:format: [0msrc/routes/+layout.ts 3ms
-[32mweb:format: [0msrc/routes/+page.svelte 31ms
-[32mweb:format: [0msrc/routes/dataset/[slug]/+page.svelte 7ms
-[32mweb:format: [0msrc/routes/dataset/[slug]/+page.ts 5ms
-[32mweb:format: [0msvelte.config.js 5ms
-[32mweb:format: [0mtailwind.config.cjs 5ms
+[32mweb:format: [0msrc/routes/+layout.ts 4ms
+[32mweb:format: [0msrc/routes/+page.svelte 36ms
+[32mweb:format: [0msrc/routes/dataset/[slug]/+page.svelte 42ms
+[32mweb:format: [0msrc/routes/donation/+page.svelte 36ms
+[32mweb:format: [0mstats.html 913ms
+[32mweb:format: [0msvelte.config.js 33ms
+[32mweb:format: [0mtailwind.config.cjs 2ms
 [32mweb:format: [0mtsconfig.json 2ms
-[32mweb:format: [0mvite.config.ts 3ms
+[32mweb:format: [0mvite.config.ts 2ms
