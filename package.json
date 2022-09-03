@@ -7,7 +7,7 @@
     "server"
   ],
   "scripts": {
-    "setup": "husky install && prisma init && prisma generate",
+    "setup": "husky install && prisma generate",
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
     "format": "turbo run format"
