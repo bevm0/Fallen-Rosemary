@@ -6,6 +6,7 @@
   import SearchIcon from '$components/Icons/Search.svelte'
   import HamburgerIcon from '$components/Icons/Hamburger.svelte'
   import CloseIcon from '$components/Icons/X.svelte'
+  import Logo from '$components/Icons/Logo.svelte'
 
   let searchOpen = false
 
@@ -16,21 +17,15 @@
 
 <svelte:window on:resize={closeSearchbar} />
 
-<nav class="navbar bg-base-100 drop-shadow-md">
+<nav class="navbar bg-base-100 drop-shadow-md z-10">
   <!-- left side of navbar, searchbar or logo button -->
   {#if searchOpen}
     <Searchbar on:outside_click={closeSearchbar} />
   {:else}
     <div class="navbar-start">
-      <button class="btn btn-ghost">
-        <img
-          src="/assets/header/tiny.webp"
-          alt="logo"
-          height="48px"
-          width="200px"
-          class="w-40 sm:w-auto"
-        />
-      </button>
+      <a href="/" class="btn btn-ghost" aria-label="Home">
+        <Logo />
+      </a>
     </div>
   {/if}
 

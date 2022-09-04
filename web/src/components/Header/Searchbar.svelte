@@ -1,11 +1,11 @@
 <script lang="ts">
   import { clickOutside } from '$lib/actions'
-
-  import { useQuery } from '@sveltestack/svelte-query'
   import trpc from '$lib/trpc'
 
-  import VirtualList from '$components/VirtualList.svelte'
+  import { useQuery } from '@sveltestack/svelte-query'
+
   import SearchIcon from '$components/Icons/Search.svelte'
+  import Autocomplete from '$components/Autocomplete.svelte'
 
   // input
   let search = ''
@@ -18,27 +18,25 @@
   const openSearch = () => (isSearching = true)
   const closeSearch = () => (isSearching = false)
 
-  // selecting an autocomplete option will update the search string
-  const handleAutocompleteClick = (search_selected: string) => {
-    search = search_selected
-  }
-
   // search results
   //////////////////////////////////////////
-  const queryResult = useQuery(
-    'getNames',
-    async () => await trpc(fetch).query('getNames')
+  const nameResult = useQuery(
+    'getDatasetNames',
+    async () => await trpc(fetch).query('getDatasetNames')
+  )
+
+  const keywordResult = useQuery(
+    'getKeywords',
+    async () => await trpc(fetch).query('getKeywords')
   )
 
   // use search type to determine which options to show
   let searchType = 'names'
 
   // autocomplete options is reactive to the search type as well as the queries
-  $: autocompleteOptions = (searchType === 'keywords' ? keywords : names).filter((word) =>
-    word.includes(search)
-  )
-  $: keywords = $queryResult.data?.keywords || []
-  $: names = $queryResult.data?.names || []
+  $: autocompleteOptions = searchType === 'keywords' ? keywords : names
+  $: keywords = $keywordResult.data || []
+  $: names = $nameResult.data || []
 </script>
 
 <div
@@ -59,45 +57,44 @@
         <SearchIcon />
       </button>
     </div>
-    <div
-      tabindex="0"
-      class="absolute w-full top-full collapse border border-base-300 border-t-primary border-b-0 outline-none bg-base-100 max-h-80 overflow-y-scroll"
-      class:collapse-open={isSearching}
-    >
-      <div class="collapse-content">
-        <div>
-          <div class="form-control">
-            <label class="label cursor-pointer">
-              <span class="label-text">Name</span>
-              <input
-                type="radio"
-                name="radio-6"
-                class="radio checked:bg-primary"
-                bind:group={searchType}
-                value="names"
-              />
-            </label>
-          </div>
-          <div class="form-control">
-            <label class="label cursor-pointer">
-              <span class="label-text">Keyword</span>
-              <input
-                type="radio"
-                name="radio-6"
-                class="radio checked:bg-primary"
-                bind:group={searchType}
-                value="keywords"
-              />
-            </label>
-          </div>
+
+    <!-- expose the item prop for the slot that renders each item -->
+    <Autocomplete options={autocompleteOptions} isOpen={isSearching} searchValue={search}>
+      <!-- use the "above" named slot to add in the two radio buttons that control search type -->
+      <div class="p-2" slot="above">
+        <div class="form-control">
+          <label class="label cursor-pointer">
+            <span class="label-text">Name</span>
+            <input
+              type="radio"
+              name="radio-6"
+              class="radio checked:bg-primary"
+              bind:group={searchType}
+              value="names"
+            />
+          </label>
         </div>
-        <div class="divider m-0" />
-        <VirtualList items={autocompleteOptions} let:item>
-          <li>
-            <a href="/" on:click={() => handleAutocompleteClick(item)}>{item}</a>
-          </li>
-        </VirtualList>
+        <div class="form-control">
+          <label class="label cursor-pointer">
+            <span class="label-text">Keyword</span>
+            <input
+              type="radio"
+              name="radio-6"
+              class="radio checked:bg-primary"
+              bind:group={searchType}
+              value="keywords"
+            />
+          </label>
+        </div>
       </div>
-    </div>
+      <div class="divider m-0" />
+
+      <!-- use the list item slot to render each item forwarded from the virtual list -->
+      <li slot="list-item" let:item>
+        <a href="/">
+          {item}
+        </a>
+      </li>
+    </Autocomplete>
   </div>
 </div>

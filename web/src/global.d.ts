@@ -3,3 +3,7 @@ declare namespace svelte.JSX {
     onoutside_click?: () => void
   }
 }
+
+declare module '@fortawesome/free-solid-svg-icons/index.es' {
+  export * from '@fortawesome/free-solid-svg-icons'
+}

@@ -4,7 +4,7 @@
   import trpc from '$lib/trpc'
 
   const queryResult = useQuery(
-    'getDatasets',
+    'topDatasetsByDate',
     async () =>
       await trpc(fetch).query('getDatasets', {
         orderBy: 'DateDonated',
@@ -12,7 +12,7 @@
       })
   )
   const queryResultHits = useQuery(
-    'getDatasetasdfls',
+    'topDatasetsByHits',
     async () =>
       await trpc(fetch).query('getDatasets', {
         orderBy: 'NumHits',
@@ -34,8 +34,8 @@
           around the world!
         </p>
         <div class="flex justify-center gap-5 flex-wrap">
-          <button class="btn btn-primary">View Datasets</button>
-          <button class="btn btn-secondary">Contribute a Dataset</button>
+          <a href="/" class="btn btn-primary">View Datasets</a>
+          <a href="/donation" class="btn btn-secondary">Contribute a Dataset</a>
         </div>
       </div>
     </div>
@@ -43,12 +43,12 @@
 
   <div class="grid grid-cols-1 xl:grid-cols-2 w-full my-16 ">
     <div
-      class="flex flex-col col-span-1 gap-4 p-4 border border-primary border-0 xl:border-r-2"
+      class="flex flex-col col-span-1 gap-1 p-4 border border-primary border-0 xl:border-r-2"
     >
       {#each $queryResultHits.data || [] as dataset}
-        <div>
-          <h1 class="text-primary text-center font-bold break-word">
-            <a href="/" class="btn btn-ghost p-1">
+        <div class="hover:bg-base-200 p-2 rounded-lg">
+          <h1 class="text-primary text-center font-bold break-word underline">
+            <a href="/dataset/{dataset.slug}" class="btn btn-ghost">
               {dataset.Name}
             </a>
           </h1>
@@ -77,7 +77,7 @@
             </div>
 
             <div class="col-span-11 gap-5 ml-4">
-              <h2 class="my-4 line-clamp-4 break-all overflow-x-hidden">
+              <h2 class="my-4 line-clamp-4 break-word overflow-x-hidden">
                 {dataset.Abstract}
               </h2>
               <div class="hidden md:grid grid-cols-12">
@@ -143,15 +143,15 @@
             </div>
           </div>
         </div>
-        <div class="divider" />
+        <div class="divider my-0" />
       {/each}
     </div>
 
-    <div class="flex flex-col col-span-1 gap-4 p-4">
+    <div class="flex flex-col col-span-1 gap-1 p-4">
       {#each $queryResult.data || [] as dataset}
-        <div>
+        <div class="hover:bg-base-200 p-2 rounded-lg">
           <h1 class="text-primary text-center font-bold break-word">
-            <a href="/" class="btn btn-ghost p-1">
+            <a href="/" class="btn btn-ghost">
               {dataset.Name}
             </a>
           </h1>
@@ -180,7 +180,7 @@
             </div>
 
             <div class="col-span-11 gap-5 ml-4">
-              <h2 class="my-4 line-clamp-4 break-all overflow-x-hidden">
+              <h2 class="my-4 line-clamp-4 break-word overflow-x-hidden">
                 {dataset.Abstract}
               </h2>
               <div class="hidden md:grid grid-cols-12">
@@ -246,7 +246,7 @@
             </div>
           </div>
         </div>
-        <div class="divider" />
+        <div class="divider my-0" />
       {/each}
     </div>
   </div>

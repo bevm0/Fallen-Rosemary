@@ -140,7 +140,6 @@
   <svelte-virtual-list-contents
     bind:this={contents}
     style="padding-top: {top}px; padding-bottom: {bottom}px;"
-    class="menu menu-compact dropdown-content px-0"
   >
     {#each visible as row (row.index)}
       <svelte-virtual-list-row>
@@ -153,6 +152,7 @@
 <style>
   svelte-virtual-list-viewport {
     position: relative;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     display: block;
   }

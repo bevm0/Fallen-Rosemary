@@ -4,12 +4,17 @@ import { z } from 'zod'
 
 const appRouter = trpc
   .router<Context>()
-  .query('getNames', {
+  .query('getKeywords', {
     async resolve({ ctx: { database_services } }) {
       const keywords = await database_services.keywords.getAllUnique()
-      const names = await database_services.donated_datasets.getAllUnique()
 
-      return { keywords, names }
+      return keywords
+    },
+  })
+  .query('getDatasetNames', {
+    async resolve({ ctx: { database_services } }) {
+      const dataset_names = await database_services.donated_datasets.getAllUnique()
+      return dataset_names
     },
   })
   .query('getDatasets', {
