@@ -73,6 +73,12 @@ const appRouter = trpc
       return database_services.donated_datasets.selectDatasets(query, input?.limit, filter)
     },
   })
+  .mutation('hello', {
+    input: z.string(),
+    async resolve() {
+      return 'yeet'
+    },
+  })
 
 export type Router = typeof appRouter
 export default appRouter

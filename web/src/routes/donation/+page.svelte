@@ -4,6 +4,8 @@
   import Tabular from './Tabular.svelte'
   import type { BasicInfoType, DescriptiveType } from './DataStore'
 
+  import { trpcClient } from '$lib/trpc'
+
   const currentUser = {
     firstName: 'Elysia',
     lastName: 'Ego',
