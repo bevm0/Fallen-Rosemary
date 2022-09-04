@@ -4,6 +4,13 @@
   import Tabular from './Tabular.svelte'
   import type { BasicInfoType, DescriptiveType } from './DataStore'
 
+  import { useMutation } from '@sveltestack/svelte-query'
+  import trpc from '$lib/trpc'
+
+  const mutation = useMutation((input: formData) =>
+    trpc(fetch).mutation('sendFormData', input)
+  )
+
   const currentUser = {
     firstName: 'Elysia',
     lastName: 'Ego',
@@ -87,6 +94,8 @@
 
     console.log(pagesState)
     console.log(page)
+
+    const queryResult = $mutation.mutate(pagesState)
 
     // if at end of form, make request, otherwise increment page counter
     if (page === pages.length - 1) {

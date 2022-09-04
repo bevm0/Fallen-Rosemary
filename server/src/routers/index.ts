@@ -80,5 +80,72 @@ const appRouter = trpc
     },
   })
 
+  .mutation('sendFormData', {
+    input: z.object({
+      metadata: z.object({
+        Name: z.string(),
+        Abstract: z.string(),
+        Types: z.string().array(),
+        Task: z.string().array(),
+        Area: z.string(),
+        DOI: z.string().nullable(),
+      }),
+
+      creator: z.object({
+        firstName: z.string().min(1),
+        lastName: z.string().min(1),
+        // either an email, or empty string; if empty string, convert to null on submit
+        email: z.string().nullable(),
+        institution: z.string().nullable(),
+        address: z.string().nullable(),
+      }),
+
+      keywords: z.any(),
+      creators: z.any(),
+
+      // part 2
+      tabular: z.object({
+        missingValues: z.any(),
+      }),
+
+      attributes: z.any(),
+
+      // part 3
+      descriptive: z.object({
+        purpose: z.any(),
+        funding: z.any(),
+        represent: z.any(),
+        dataSplits: z.any(),
+        sensitiveInfo: z.any(),
+        preprocessingDescription: z.any(),
+        used: z.any(),
+        otherInfo: z.any(),
+        datasetCitation: z.any(),
+      }),
+    }),
+    async resolve({ input, ctx: { prisma } }) {
+      const existingUser = await prisma.creators.findFirst({
+        where: input.creator,
+      })
+
+      const existingID =
+        existingUser?.ID ||
+        (
+          await prisma.creators.create({
+            data: input.creator,
+          })
+        ).ID
+
+      return await prisma.donated_datasets.create({
+        data: {
+          ...input.metadata,
+          Types: input.metadata.Types.join(','),
+          Task: input.metadata.Task.join(','),
+          users: { connect: { ID: existingID } },
+        },
+      })
+    },
+  })
+
 export type Router = typeof appRouter
 export default appRouter
