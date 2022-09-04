@@ -1,6 +1,7 @@
 import * as trpc from '@trpc/server'
 import type { Context } from '../context'
 import { z } from 'zod'
+import { resolve } from 'path'
 
 const appRouter = trpc
   .router<Context>()
@@ -71,6 +72,11 @@ const appRouter = trpc
             }),
       }
       return database_services.donated_datasets.selectDatasets(query, input?.limit, filter)
+    },
+  })
+  .query('getCount', {
+    async resolve({ ctx: { database_services } }) {
+      return database_services.donated_datasets.getCount()
     },
   })
 

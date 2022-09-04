@@ -19,17 +19,19 @@
         limit: 6,
       })
   )
+
+  const queryCount = useQuery('getCount', async () => await trpc(fetch).query('getCount'))
 </script>
 
 <main class="px-4 max-w-[1640px] mx-auto">
-  <div class="hero mx-auto my-12 mx-0">
+  <div class="hero mx-auto my-12">
     <div class="hero-content text-center">
       <div class="max-w-md">
         <h1 class="text-3xl text-primary font-bold">
           Welcome to the UC Irvine Machine Learning Repository
         </h1>
         <p class="py-6">
-          We currently maintain 612 datasets as a service to the machine learning
+          We currently maintain {$queryCount.data} datasets as a service to the machine learning
           community. Here, you can donate and find datasets used by millions of people all
           around the world!
         </p>

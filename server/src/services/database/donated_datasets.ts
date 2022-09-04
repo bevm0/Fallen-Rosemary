@@ -35,6 +35,10 @@ class DonatedDatasetsService extends BaseDatabaseService {
       ...filter,
     })
   }
+
+  async getCount() {
+    return await this.prisma.donated_datasets.count()
+  }
 }
 
 export default DonatedDatasetsService
