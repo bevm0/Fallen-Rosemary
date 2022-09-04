@@ -51,6 +51,7 @@
       class="w-full outline-none bg-transparent"
       bind:value={search}
       on:click={openSearch}
+      aria-label="search-input"
     />
     <div on:click>
       <button class="btn btn-ghost btn-circle btn-sm" aria-label="toggle sidebar">
@@ -61,9 +62,9 @@
     <!-- expose the item prop for the slot that renders each item -->
     <Autocomplete options={autocompleteOptions} isOpen={isSearching} searchValue={search}>
       <!-- use the "above" named slot to add in the two radio buttons that control search type -->
-      <div class="p-2" slot="above">
+      <div class="p-2 flex justify-evenly flex-wrap" slot="above">
         <div class="form-control">
-          <label class="label cursor-pointer">
+          <label class="label cursor-pointer flex gap-3">
             <span class="label-text">Name</span>
             <input
               type="radio"
@@ -75,7 +76,7 @@
           </label>
         </div>
         <div class="form-control">
-          <label class="label cursor-pointer">
+          <label class="label cursor-pointer flex gap-3">
             <span class="label-text">Keyword</span>
             <input
               type="radio"
@@ -90,11 +91,9 @@
       <div class="divider m-0" />
 
       <!-- use the list item slot to render each item forwarded from the virtual list -->
-      <li slot="list-item" let:item>
-        <a href="/">
-          {item}
-        </a>
-      </li>
+      <a slot="list-item" href="/" let:item on:click={() => (search = item)}>
+        {item}
+      </a>
     </Autocomplete>
   </div>
 </div>

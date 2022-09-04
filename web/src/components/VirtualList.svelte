@@ -126,7 +126,7 @@
 
   // trigger initial refresh
   onMount(() => {
-    rows = contents.getElementsByTagName('svelte-virtual-list-row')
+    rows = contents.getElementsByTagName('li')
     mounted = true
   })
 </script>
@@ -137,16 +137,18 @@
   on:scroll={handle_scroll}
   style="height: {height};"
 >
-  <svelte-virtual-list-contents
+  <ul
+    tag:svelte-virtual-list-contents
     bind:this={contents}
     style="padding-top: {top}px; padding-bottom: {bottom}px;"
+    class="menu"
   >
     {#each visible as row (row.index)}
-      <svelte-virtual-list-row>
+      <li tag:svelte-virtual-list-row>
         <slot item={row.data}>Missing template</slot>
-      </svelte-virtual-list-row>
+      </li>
     {/each}
-  </svelte-virtual-list-contents>
+  </ul>
 </svelte-virtual-list-viewport>
 
 <style>
@@ -157,12 +159,12 @@
     display: block;
   }
 
-  svelte-virtual-list-contents,
-  svelte-virtual-list-row {
+  ul,
+  li {
     display: block;
   }
 
-  svelte-virtual-list-row {
+  li {
     overflow: hidden;
   }
 </style>

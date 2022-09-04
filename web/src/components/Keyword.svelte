@@ -56,7 +56,6 @@
   class="flex items-center justify-between gap-3 flex-wrap w-full h-full relative"
   use:clickOutside
   on:outside_click={close}
-  on:outside_click
 >
   <input type="text" bind:value class="input input-bordered w-1/2" on:click={open} />
   <div class="flex gap-2">
@@ -71,11 +70,14 @@
   </div>
   <div class="w-1/2 h-full relative mr-auto">
     <Autocomplete options={keywords} {isOpen} isAbsolute searchValue={value}>
-      <li slot="list-item" let:item>
-        <a href="/" on:click|preventDefault={() => handleChange(item)}>
-          {item}
-        </a>
-      </li>
+      <a
+        slot="list-item"
+        href="/"
+        on:click|preventDefault={() => handleChange(item)}
+        let:item
+      >
+        {item}
+      </a>
     </Autocomplete>
   </div>
 </div>

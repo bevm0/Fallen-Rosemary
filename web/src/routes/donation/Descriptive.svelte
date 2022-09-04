@@ -11,7 +11,7 @@
   import { reporter } from '@felte/reporter-svelte'
   import { validator } from '@felte/validator-zod'
 
-  const { form, data } = createForm<DescriptiveType>({
+  const { form, data, errors } = createForm<DescriptiveType>({
     initialValues,
     extend: [validator({ schema: DescriptiveSchema }), reporter],
     onSubmit,

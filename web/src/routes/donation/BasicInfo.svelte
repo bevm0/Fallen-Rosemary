@@ -1,11 +1,15 @@
 <script lang="ts">
-  // receive initial values and submit prop from the parent component
+  // initial values for form data
   export let initialValues: BasicInfoType
+
+  // what to do on submit, e.g. save to store
   export let onSubmit: (formData: BasicInfoType) => void
+
+  // what to do if going back; null function means not able to go back
   export let onBack: null | ((formData: BasicInfoType) => void) = null
 
-  //import Fa from 'svelte-fa'
-  //import { faCheck } from '@fortawesome/free-solid-svg-icons'
+  // if last step, display "Finish", else display "Next"
+  export let isLastStep = false
 
   import type { BasicInfoType } from './DataStore'
   import { BasicInfoSchema } from './DataStore'
@@ -23,6 +27,7 @@
   import CreatorFieldArray from '$components/Forms/CreatorFieldArray.svelte'
   import Keyword from '$components/Keyword.svelte'
 
+  // initialize form
   const currentUser = {
     firstName: 'Elysia',
     lastName: 'Ego',
@@ -36,6 +41,10 @@
     extend: [validator({ schema: BasicInfoSchema }), reporter],
     onSubmit,
   })
+
+  // form controls not part of the form data
+  let creatorIsDonor = 'Yes'
+  let hasDOI = $data.metadata.DOI == null ? 'No' : 'Yes'
 
   // enumerated form fields
   //////////////////////////////////////////
@@ -71,12 +80,16 @@
     'getKeywords',
     async () => await trpc(fetch).query('getKeywords')
   )
+
   $: allKeywords = $keywordResult.data || []
 
   $: creators = $data.creators || []
   $: keywords = $data.keywords || []
 
   // field array controls
+  // they respond based on events dispatched from the child component
+  // a child component binds its data to an object at e.g. $data.creators[index]
+  // and dispatches an event with its index whenver an interaction is made with it
   //////////////////////////////////////////
   function removeCreator(e: CustomEvent<{ index: number }>) {
     return unsetField(`creators.${e.detail.index}`)
@@ -86,8 +99,6 @@
     return addField(`creators`, defaultCreator, e.detail.index + 1)
   }
 
-  // controls for field arrays
-  // they respond based on events dispatched from the child component
   function removeKeyword(e: CustomEvent<{ index: number }>) {
     return unsetField(`keywords.${e.detail.index}`)
   }
@@ -95,8 +106,6 @@
   function addKeyword(e: CustomEvent<{ index: number }>) {
     return addField(`keywords`, '', e.detail.index + 1)
   }
-
-  let creatorIsDonor = 'Yes'
 </script>
 
 <div class="overflow-y-scroll p-4">
@@ -138,9 +147,9 @@
 
       <div class="flex flex-col gap-2">
         <label for="area-radio" class="text-xl">Areas*</label>
-        <div id="area-radio" class="flex gap-2 form-control max-w-sm">
+        <div id="area-radio" class="form-control flex gap-4 max-w-sm">
           {#each Areas as Area}
-            <label class="label cursor-pointer">
+            <label class="label cursor-pointer flex gap-3">
               <span class="label-text text-md">{Area}</span>
               <input
                 type="radio"
@@ -176,11 +185,34 @@
 
       <div class="flex flex-col gap-2">
         <label for="metadata.DOI" class="text-xl">DOI*</label>
+        <div id="DOI-radio" class="flex gap-2 form-control max-w-sm">
+          <label class="label cursor-pointer">
+            <span class="label-text text-md">Yes</span>
+            <input
+              type="radio"
+              class="radio radio-primary"
+              on:change={() => setData('metadata.DOI', '')}
+              bind:group={hasDOI}
+              value="Yes"
+            />
+          </label>
+          <label class="label cursor-pointer">
+            <span class="label-text text-md">No</span>
+            <input
+              type="radio"
+              class="radio radio-primary"
+              on:change={() => setData('metadata.DOI', null)}
+              bind:group={hasDOI}
+              value="No"
+            />
+          </label>
+        </div>
         <input
           id="metadata.DOI"
           name="metadata.DOI"
           type="text"
           class="input input-bordered"
+          class:hidden={hasDOI === 'No'}
         />
       </div>
 
@@ -287,11 +319,13 @@
     <div class="flex gap-3">
       {#if onBack != null}
         <button
-          class="btn btn-error w-40 mx-auto"
+          class="btn btn-error w-32 mx-auto"
           on:click|preventDefault={() => onBack && onBack($data)}>Back</button
         >
       {/if}
-      <button class="btn btn-primary w-40" type="submit">Done</button>
+      <button class="btn btn-primary w-32" type="submit"
+        >{isLastStep ? 'Finish' : 'Next'}</button
+      >
     </div>
   </form>
 </div>

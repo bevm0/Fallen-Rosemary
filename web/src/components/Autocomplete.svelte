@@ -11,7 +11,9 @@
   // component to produce the correct options
   export let searchValue = ''
 
-  $: filteredOptions = options.filter((option) => option.includes(searchValue))
+  $: filteredOptions = options.filter((option) =>
+    option.toLowerCase().includes(searchValue.toLowerCase())
+  )
 </script>
 
 <div
@@ -23,14 +25,11 @@
 >
   <div class="collapse-content p-0">
     <slot name="above" />
-
-    <ul class="menu {height}">
-      <!-- default slot allows you to wrap the virtual list -->
-      <VirtualList items={filteredOptions} let:item>
-        <slot name="list-item" {item}>
-          {item}
-        </slot>
-      </VirtualList>
-    </ul>
+    <!-- default slot allows you to wrap the virtual list -->
+    <VirtualList height="360px" items={filteredOptions} let:item>
+      <slot name="list-item" {item}>
+        {item}
+      </slot>
+    </VirtualList>
   </div>
 </div>
